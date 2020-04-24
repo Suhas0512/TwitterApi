@@ -17,18 +17,16 @@ const tweetsSchema = new Schema({
 })
 
 tweetsSchema.pre('save', function(next){
-    //console.log('hi')
     const tweet = this
-    console.log('hi',tweet.name)
     if(tweet.isNew){
-        var client = new Twitter({
+        const client = new Twitter({
             consumer_key: '',
             consumer_secret: '',
             access_token_key: '',
             access_token_secret: ''
           });
            
-          var params = {screen_name: tweet.name};
+          const params = {screen_name: tweet.name};
           client.get('statuses/user_timeline', params, function(error, tweets, response) {
             if (!error) {
               const tweet1  = tweets.map(tweet=>tweet.text)
